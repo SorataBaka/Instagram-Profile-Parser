@@ -24,7 +24,9 @@ const getJSON = async(PARAMETERS:parameter) => {
   const query = await axios.request({
     url: baseURL,
     method: "GET"
-  }).catch(err => {return undefined})
+  }).catch(err => {
+    console.log(err)
+    return undefined})
   if(!query) throw "Error: Failed to fetch"
   return query.data
 }
