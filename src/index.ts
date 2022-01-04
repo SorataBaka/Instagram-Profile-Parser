@@ -17,8 +17,8 @@ const recursive = async(parameter:any, readFile:any, username:string) => {
   }
 }
 const execute = async(username:string) => {
-  if(fs.existsSync("./output")) fs.mkdirSync("./output")
-  fs.mkdirSync(`./output/${username}Profile`)
+  if(!fs.existsSync("./output")) fs.mkdirSync("./output")
+  if(!fs.existsSync(`./output/${username}Profile`))fs.mkdirSync(`./output/${username}Profile`)
   const idquery = await axios.request({
     url: `https://www.instagram.com/${username}/?__a=1`,
     method: "GET"
@@ -38,4 +38,4 @@ const execute = async(username:string) => {
   })
   recursive(parameter, readFile, username)
 }
-execute("michelleeserafin")
+execute("inkyung97")
