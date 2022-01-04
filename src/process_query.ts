@@ -12,7 +12,10 @@ const processQuery = async(readFile:any, username:string) => {
       url = media.node.display_url
       type = 1
     }
-    await downloadFile(url, imageName, type, username)
+    await downloadFile(url, imageName, type, username).catch((err:Error) => {
+      console.log(err)
+      throw "Error: failed at download"
+    })
   }
 }
 export default processQuery

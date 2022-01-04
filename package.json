@@ -24,5 +24,13 @@
     "node"
   ],
   "author": "Christian Harjuno (SorataBaka)",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SorataBaka/Instagram-Profile-Parser.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SorataBaka/Instagram-Profile-Parser/issues"
+  },
+  "homepage": "https://github.com/SorataBaka/Instagram-Profile-Parser#readme"
 }
