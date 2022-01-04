@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "axios": "^0.24.0",
+    "fs": "^0.0.1-security"
+  },
+  "name": "instagram-profile-parser",
+  "version": "1.0.0",
+  "description": "Simple instagram parser",
+  "main": "./build/index.js",
+  "devDependencies": {
+    "@types/node": "^17.0.7",
+    "typescript": "^3.5.3"
+  },
+  "scripts": {
+    "start": "tsc && node build/index.js",
+    "build": "tsc",
+    "dev": "tsc -w && nodemon build/index.js"
+  },
+  "keywords": [
+    "instagram",
+    "parser",
+    "nodejs",
+    "javascript",
+    "node"
+  ],
+  "author": "Christian Harjuno (SorataBaka)",
+  "license": "ISC"
+}
