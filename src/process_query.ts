@@ -1,4 +1,5 @@
 import downloadFile from "./write_file"
+import consola from "consola"
 const processQuery = async(readFile:any, username:string) => {
   const timelineMedia = readFile.data.user.edge_owner_to_timeline_media.edges
   for(const media of timelineMedia){
@@ -13,7 +14,7 @@ const processQuery = async(readFile:any, username:string) => {
       type = 1
     }
     await downloadFile(url, imageName, type, username).catch((err:Error) => {
-      console.log(err)
+      consola.error(err)
       throw "Error: failed at download"
     })
   }

@@ -3,6 +3,7 @@ import getJSON from "./get_query"
 import processQuery from "./process_query"
 import axios from "axios"
 import fs from "fs"
+import consola from "consola"
 const recursive = async(parameter:any, readFile:any, username:string) => {
   if(readFile.data.user.edge_owner_to_timeline_media.page_info.has_next_page){
     const newParameter = {
@@ -12,13 +13,14 @@ const recursive = async(parameter:any, readFile:any, username:string) => {
     }
     const newReadFile = await getJSON(newParameter)
     await processQuery(newReadFile, username).catch((err:any) => {
-      console.log(err)
+      consola.error(err)
       throw "Error: Error at processing query"
     })
-    recursive(newParameter, newReadFile, username)
+    await recursive(newParameter, newReadFile, username)
   }
 }
-const execute = async(username:string, query_hash:string) => {
+const execute = async(username:string) => {
+  if(!username) throw "Error: No instagram profile provided. `npm start {profile name}`"
   if(!fs.existsSync("./output")) fs.mkdirSync("./output")
   if(!fs.existsSync(`./output/${username}Profile`))fs.mkdirSync(`./output/${username}Profile`)
 
@@ -33,17 +35,22 @@ const execute = async(username:string, query_hash:string) => {
   const userid = idquery.data.graphql.user.id
   const parameter = {
     id: userid,
-    query_hash: query_hash
+    query_hash: "8c2a529969ee035a5063f2fc8602a0fd"
   }
   const readFile = await getJSON(parameter).catch((err:any) => {
-    console.log(err)
+    consola.error(err)
     throw "Error: Error at fetching metadata"
   })
   await processQuery(readFile, username).catch((err:any) => {
-    console.log(err)
+    consola.error(err)
     throw "Error: Error at processing query"
   })
-  recursive(parameter, readFile, username)
+  await recursive(parameter, readFile, username)
+  consola.info("Finished parsing profile")
+  consola.info("Output at directory: ")
+  consola.info(__dirname + `\\..\\output\\${username}Profile`)
 }
-if(!process.argv[2]) throw "Error: No instagram profile provided. `npm start {profile name}`"
-execute(process.argv[2], "8c2a529969ee035a5063f2fc8602a0fd")
+
+
+
+export default execute

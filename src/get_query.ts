@@ -1,4 +1,5 @@
 import axios from "axios"
+import consola from "consola"
 interface parameter {
   id:string
   query_hash:string
@@ -25,7 +26,7 @@ const getJSON = async(PARAMETERS:parameter) => {
     url: baseURL,
     method: "GET"
   }).catch(err => {
-    console.log(err)
+    consola.error(err)
     return undefined})
   if(!query) throw "Error: Failed to fetch"
   return query.data

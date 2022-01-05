@@ -1,7 +1,9 @@
 {
   "dependencies": {
     "axios": "^0.24.0",
-    "fs": "^0.0.1-security"
+    "consola": "^2.15.3",
+    "fs": "^0.0.1-security",
+    "yargs": "^17.3.1"
   },
   "name": "instagram-profile-parser",
   "version": "1.0.0",
@@ -9,6 +11,7 @@
   "main": "./build/index.js",
   "devDependencies": {
     "@types/node": "^17.0.7",
+    "@types/yargs": "^17.0.8",
     "typescript": "^3.5.3"
   },
   "scripts": {
@@ -32,5 +35,8 @@
   "bugs": {
     "url": "https://github.com/SorataBaka/Instagram-Profile-Parser/issues"
   },
-  "homepage": "https://github.com/SorataBaka/Instagram-Profile-Parser#readme"
+  "homepage": "https://github.com/SorataBaka/Instagram-Profile-Parser#readme",
+  "bin": {
+    "ig-parser": "./build/index.js"
+  }
 }
