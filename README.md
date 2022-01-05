@@ -6,8 +6,12 @@ Simple script to download every public post of an instagram page.
 
 ```
 git clone https://github.com/SorataBaka/Instagram-Profile-Parser.git
+
 cd Instagram-Profile-Parser
+
 npm install
+
+npm run build
 ```
 ## Usage<br>
 
