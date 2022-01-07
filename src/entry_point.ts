@@ -12,11 +12,15 @@ const recursive = async(parameter:any, readFile:any, username:string) => {
       after: readFile.data.user.edge_owner_to_timeline_media.page_info.end_cursor
     }
     const newReadFile = await getJSON(newParameter)
+    if(!newReadFile) throw "Error: Error at fetching metadata"
     await processQuery(newReadFile, username).catch((err:any) => {
       consola.error(err)
       throw "Error: Error at processing query"
     })
-    await recursive(newParameter, newReadFile, username)
+    await recursive(newParameter, newReadFile, username).catch((err:any) => {
+      consola.error(err)
+      throw "Error: Error at recursive"
+    })
   }
 }
 const execute = async(username:string) => {
@@ -41,16 +45,17 @@ const execute = async(username:string) => {
     consola.error(err)
     throw "Error: Error at fetching metadata"
   })
+  if(!readFile) throw "Error: Error at fetching metadata"
   await processQuery(readFile, username).catch((err:any) => {
     consola.error(err)
     throw "Error: Error at processing query"
   })
-  await recursive(parameter, readFile, username)
+  await recursive(parameter, readFile, username).catch((err:any) => {
+    consola.error(err)
+    throw "Error: Error at recursive"
+  })
   consola.info("Finished parsing profile")
   consola.info("Output at directory: ")
   consola.info(__dirname + `\\..\\output\\${username}Profile`)
 }
-
-
-
 export default execute
